@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../contexts/auth";
 
 import "./styles.css";
 
 const LoginPage = () => {
+  const { authentecated, login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const handleSunmit = (e) => {
     e.preventDefault();
     console.log("submit", { email, password });
+    login(email, password);
   };
   return (
     <div id="login">
       <h1 className="title">Login do sistema</h1>
+      <p>{String(authentecated)}</p>
       <form className="form" onSubmit={handleSunmit}>
         <div className="field">
           <label htmlFor="email">Email</label>
