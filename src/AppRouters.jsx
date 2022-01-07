@@ -13,7 +13,12 @@ import { AuthProvider, AuthContext } from "./contexts/auth";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {
-    const { authentecated } = useContext(AuthContext);
+    const { authentecated, loading } = useContext(AuthContext);
+
+    if (loading) {
+      return <div className="loading">Carregando</div>;
+    }
+
     if (!authentecated) {
       return <Navigate to="/login" />;
     }
